@@ -3,10 +3,10 @@ namespace Controllers;
 
 require_once ("../libraries/controllers/User.php");
 
-
 class User
 {
     protected $models;
+    public $errors= array();
 
     public function __construct()
     {
@@ -16,27 +16,31 @@ class User
     public function register()
     {
         if(empty($_POST['login'])){
-            $errors['login'] = "Your login is not valid";
+            $errors = "Your login is not valid";
+            echo $errors;
         } else{
             $check = $this->model->find($_POST['login']);
             if($check == true){
-                $errors['login'] = "Login not available";
+                $errors= "Login not available";
+                echo $errors;
             }
         }
 
         if(empty($_POST['password'])){
-            $errors['password'] = "You must enter a valid password";
+            $errors ="You must enter a valid password";
+            echo $errors;
         }
 
         if($_POST['password'] != $_POST['passwordConfirm']){
-            $errors['password_confirm'] = "Your password doesn't match";
+            $errors = "Your password doesn't match";
+            echo $errors;
         }
 
         if (empty($errors)){
             $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
             $add = $this->model->insert($_POST['login'], $password);
+            header('location:index_view.php');
             return $add;
-            // header('location:index.php');
         }
     }
 }

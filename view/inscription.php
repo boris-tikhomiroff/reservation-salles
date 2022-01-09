@@ -30,12 +30,12 @@ if(isset($_POST['submit'])){
             <label for="password" class="form__label"></label>
             <input type="password" id="password" name="password" placeholder="Your password" class="form__text"><br>
 
-
             <label for="passwordConfirm" class="form__label"></label>
             <input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="Confirm your password" class="form__text"><br>
 
             <button type="submit " name="submit" class="form__submit">Submit</button>
         </form>
+        
     </main>
 </body>
 
