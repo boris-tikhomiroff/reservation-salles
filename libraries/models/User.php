@@ -11,6 +11,7 @@ class User extends Model
         $findLogin = $this->pdo->prepare("SELECT `login` FROM `utilisateurs` WHERE `login` = '$login'");
         $findLogin->execute();
         $FindLoginResult = $findLogin->fetchAll();
+        return $FindLoginResult;
     }
 
     public function insert($login, $password)
