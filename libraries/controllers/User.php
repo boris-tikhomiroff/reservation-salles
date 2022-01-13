@@ -2,6 +2,7 @@
 namespace Controllers;
 
 require_once ("../libraries/controllers/User.php");
+require_once ("../libraries/utilities.php");
 
 class User
 {
@@ -12,35 +13,50 @@ class User
     {
         $this->model = new \Models\User();
     }
-
+    
     public function register()
     {
-        if(empty($_POST['login'])){
+        $login = security($_POST['login']);
+        $password = security($_POST['password']);
+        $passwordConfirm = security($_POST['passwordConfirm']);
+
+        if(empty($login)){
             $errors = "Your login is not valid";
             echo $errors;
         } else{
-            $check = $this->model->find($_POST['login']);
+            $check = $this->model->find($login);
             if($check == true){
                 $errors= "Login not available";
                 echo $errors;
             }
         }
 
-        if(empty($_POST['password'])){
+        if(empty($password)){
             $errors ="You must enter a valid password";
             echo $errors;
         }
 
-        if($_POST['password'] != $_POST['passwordConfirm']){
+        if($password != $passwordConfirm){
             $errors = "Your password doesn't match";
             echo $errors;
         }
 
         if (empty($errors)){
-            $password = password_hash($_POST['password'], PASSWORD_BCRYPT);
-            $add = $this->model->insert($_POST['login'], $password);
+            $passwordhash = password_hash($password, PASSWORD_BCRYPT);
+            $add = $this->model->insert($_POST['login'], $passwordhash);
             header('location:index_view.php');
             return $add;
+        }
+    }
+
+    public function connect()
+    {
+        if(!empty($_POST['login']) || !empty($_POST['password'])){
+
+            $queryfindUser = $this->model->find($_POST['login']);
+            if(password_verify($_POST['password'], $queryfindUser['password'])){
+            }
+            echo "super";
         }
     }
 }

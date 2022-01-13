@@ -14,6 +14,14 @@ class User extends Model
         return $FindLoginResult;
     }
 
+    public function catchPassword($login)
+    {
+        $catchPassword = $this->pdo->prepare("SELECT `password` FROM `utilisateurs` WHERE `login` = '$login'");
+        $catchPassword->execute();
+        $Result = $catchPassword->fetchAll();
+        return $Result;
+    }
+
     public function insert($login, $password)
     {
         $queryInsert = $this->pdo->prepare("INSERT INTO `utilisateurs` (`login`, `password`) values(:login, :password)");
