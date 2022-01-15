@@ -12,7 +12,7 @@ if (isset($_POST['logout'])) {
         <ul>
             <li class="nav__item"><a href="../view/inscription.php">Inscription</a></li>
             <li class="nav__item"><a href="../view/connexion.php">Connexion</a></li>
-            <li class="nav__item"><a href="#">Profil</a></li>
+            <li class="nav__item"><a href="../view/profil.php">Profil</a></li>
             <li class="nav__item"><a href="#">Planning</a></li>
             <li class="nav__item"><a href="#">Rerservation-form</a></li>
             <li class="nav__item">

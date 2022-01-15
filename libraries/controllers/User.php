@@ -75,4 +75,8 @@ class User
         header("Refresh:0");
         return $disconnect;
     }
+
+    public function update()
+    {
+    }
 }
