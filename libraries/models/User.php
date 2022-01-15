@@ -2,7 +2,7 @@
 
 namespace Models;
 
-require_once ("../libraries/models/Model.php");
+require_once("../libraries/models/Model.php");
 
 class User extends Model
 {
@@ -18,7 +18,7 @@ class User extends Model
     {
         $catchPassword = $this->pdo->prepare("SELECT `password` FROM `utilisateurs` WHERE `login` = '$login'");
         $catchPassword->execute();
-        $Result = $catchPassword->fetchAll();
+        $Result = $catchPassword->fetch();
         return $Result;
     }
 
@@ -30,7 +30,4 @@ class User extends Model
             ":password" => "$password"
         ));
     }
-
-    
-    
 }

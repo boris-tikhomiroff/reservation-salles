@@ -20,6 +20,17 @@ if (isset($_POST['submit'])) {
 <body>
     <?php require_once 'header.php' ?>
     <main>
+        <?php if (isset($user)) : ?>
+            <div class="errors">
+                <!-- <p>You have not completed the form correctly.</p> -->
+                </ul>
+                <?php foreach ($user->errors as $error) : ?>
+                    <li><?= $error; ?></li>
+
+                <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
         <h1>Connexion</h1>
 
         <form method="post" class="form">

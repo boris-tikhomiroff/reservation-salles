@@ -31,7 +31,6 @@ class User
             }
         }
 
-
         if (empty($password)) {
             $this->errors['password'] = "You must enter a valid password";
         }
@@ -45,6 +44,26 @@ class User
             $add = $this->model->insert($_POST['login'], $passwordhash);
             header('location:index_view.php');
             return $add;
+        }
+    }
+
+    public function connect()
+    {
+        if (!empty($_POST['login']) && !empty($_POST['password'])) {
+            $login = htmlspecialchars($_POST['login']);
+            $password = htmlspecialchars($_POST['password']);
+        } else {
+            $this->errors['connect'] = "Please fill in all fields";
+        }
+
+        $passwordExist = $this->model->catchPassword($login);
+
+        if (!password_verify($password, $passwordExist['password'])) {
+            $this->errors['connect'] = "Incorrect login or password";
+        } else {
+            $_SESSION['user'] = $_POST['login'];
+            $_SESSION['userPassword'] = $_POST['password'];
+            header("location: index_view.php");
         }
     }
 }
