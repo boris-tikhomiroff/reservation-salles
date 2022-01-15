@@ -4,7 +4,7 @@ session_start();
 var_dump($_SESSION);
 require_once('../libraries/models/User.php');
 
-$user = new \Models\User();
+// $user = new \Models\User();
 
 ?>
 <!DOCTYPE html>

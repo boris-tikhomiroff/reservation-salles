@@ -61,9 +61,18 @@ class User
         if (!password_verify($password, $passwordExist['password'])) {
             $this->errors['connect'] = "Incorrect login or password";
         } else {
+            session_start();
+
             $_SESSION['user'] = $_POST['login'];
             $_SESSION['userPassword'] = $_POST['password'];
             header("location: index_view.php");
         }
+    }
+
+    public static function disconnect()
+    {
+        $disconnect = session_destroy();
+        header("Refresh:0");
+        return $disconnect;
     }
 }
