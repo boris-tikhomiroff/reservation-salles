@@ -19,7 +19,7 @@ require_once('../libraries/models/User.php');
 
 <body>
     <?php require_once "../view/header.php" ?>
-    <h1>Bonjour</h1>
+    <h1>Bonjour <?= $_SESSION['user'] ?? "" ?></h1>
 </body>
 
 </html>
