@@ -2,10 +2,14 @@
 require('../libraries/models/User.php');
 require('../libraries/controllers/User.php');
 
+// require('../libraries\Controllers/User.php');
+
 if (isset($_POST['submit'])) {
     $user = new \Controllers\User();
     $user->register();
+    // echo $user->errors;
 }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -21,8 +25,18 @@ if (isset($_POST['submit'])) {
 <body>
     <?php require_once 'header.php' ?>
     <main>
-        <h1>Inscription</h1>
+        <?php if (isset($user)) : ?>
+            <div class="errors">
+                <!-- <p>You have not completed the form correctly.</p> -->
+                </ul>
+                <?php foreach ($user->errors as $error) : ?>
+                    <li><?= $error; ?></li>
 
+                <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
+        <h1>Inscription</h1>
         <form method="post" class="form">
             <label for="login" class="form__label"></label>
             <input type="text" id="login" name="login" placeholder="Your login" class="form__text"><br>
@@ -35,8 +49,7 @@ if (isset($_POST['submit'])) {
 
             <button type="submit " name="submit" class="form__submit">Submit</button>
         </form>
-        <div class="alert">
-        </div>
+
     </main>
 </body>
 
