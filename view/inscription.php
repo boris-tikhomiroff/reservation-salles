@@ -1,8 +1,8 @@
 <?php
-require('../libraries/controllers/User.php');
 require('../libraries/models/User.php');
+require('../libraries/controllers/User.php');
 
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
     $user = new \Controllers\User();
     $user->register();
 }
@@ -26,7 +26,7 @@ if(isset($_POST['submit'])){
         <form method="post" class="form">
             <label for="login" class="form__label"></label>
             <input type="text" id="login" name="login" placeholder="Your login" class="form__text"><br>
-            
+
             <label for="password" class="form__label"></label>
             <input type="password" id="password" name="password" placeholder="Your password" class="form__text"><br>
 
@@ -35,7 +35,8 @@ if(isset($_POST['submit'])){
 
             <button type="submit " name="submit" class="form__submit">Submit</button>
         </form>
-        
+        <div class="alert">
+        </div>
     </main>
 </body>
 
