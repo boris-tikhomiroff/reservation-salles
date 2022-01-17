@@ -6,19 +6,20 @@ require_once("../libraries/models/Model.php");
 
 class User extends Model
 {
-    public function find($login)
+    public function GetUserInfo($login)
     {
-        $findLogin = $this->pdo->prepare("SELECT `login` FROM `utilisateurs` WHERE `login` = '$login'");
-        $findLogin->execute();
-        $FindLoginResult = $findLogin->fetchAll();
-        return $FindLoginResult;
+        $getUser = $this->pdo->prepare("SELECT * FROM `utilisateurs` WHERE `login` = '$login'");
+        $getUser->execute();
+        $Result = $getUser->fetchAll();
+        return $Result;
     }
 
-    public function catchPassword($login)
+
+    public function findUserInfo($id)
     {
-        $catchPassword = $this->pdo->prepare("SELECT `password` FROM `utilisateurs` WHERE `login` = '$login'");
-        $catchPassword->execute();
-        $Result = $catchPassword->fetch();
+        $findUser = $this->pdo->prepare("SELECT login,password FROM `utilisateurs` WHERE `id`= '$id'");
+        $findUser->execute();
+        $Result = $findUser->fetch();
         return $Result;
     }
 
@@ -31,19 +32,21 @@ class User extends Model
         ));
     }
 
-    public function updateLogin($login)
+    public function updateLogin($newLogin, $id)
     {
-        $queryUpdateLogin = $this->pdo->prepare("UPDATE `utilisateurs` SET `login` = :login");
-        $queryUpdateLogin->execute(array(
-            ":login" => "$login"
+        $updateLogin = $this->pdo->prepare("UPDATE `utilisateurs` SET `login` = :login WHERE `id` = $id");
+        $updateLogin->execute(array(
+            ":login" => "$newLogin"
         ));
+        return $updateLogin;
     }
 
-    public function updatePassword($password)
+    public function updatePassword($newPassword, $login)
     {
-        $queryUpdateLogin = $this->pdo->prepare("UPDATE `utilisateurs` SET `password` = :password");
-        $queryUpdateLogin->execute(array(
-            ":password" => "$password"
+        $updatePassword = $this->pdo->prepare("UPDATE `utilisateurs` SET `password` = :password");
+        $updatePassword->execute(array(
+            ":password" => "$newPassword"
         ));
+        return $updatePassword;
     }
 }

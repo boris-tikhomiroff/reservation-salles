@@ -16,18 +16,16 @@ class User
 
     public function register()
     {
-        $login = security($_POST['login']);
-        $password = security($_POST['password']);
-        $passwordConfirm = security($_POST['passwordConfirm']);
+        $login = $_POST['login'];
+        $password = $_POST['password'];
+        $passwordConfirm = $_POST['passwordConfirm'];
 
         if (empty($_POST['login'])) {
             $this->errors['login'] = "Your login is not valid";
         } else {
-            $check = $this->model->find($login);
-
-            if ($check == true) {
+            $checkLogin = $this->model->getUserInfo($login);
+            if ($checkLogin == true) {
                 $this->errors['login'] = "Login not available";
-                // echo $errors;
             }
         }
 
@@ -43,7 +41,6 @@ class User
             $passwordhash = password_hash($password, PASSWORD_BCRYPT);
             $add = $this->model->insert($_POST['login'], $passwordhash);
             header('location:index_view.php');
-            return $add;
         }
     }
 
@@ -56,15 +53,16 @@ class User
             $this->errors['connect'] = "Please fill in all fields";
         }
 
-        $passwordExist = $this->model->catchPassword($login);
+        $user = $this->model->GetUserInfo($login);
 
-        if (!password_verify($password, $passwordExist['password'])) {
+        if (!password_verify($password, $user['0']['password'])) {
             $this->errors['connect'] = "Incorrect login or password";
         } else {
             session_start();
 
-            $_SESSION['user'] = $_POST['login'];
-            $_SESSION['userPassword'] = $_POST['password'];
+            $_SESSION['user'] = $user['0']['login'];
+            $_SESSION['userPassword'] = $user['0']['password'];
+            $_SESSION['userId'] = $user['0']['id'];
             header("location: index_view.php");
         }
     }
@@ -78,17 +76,20 @@ class User
 
     public function update()
     {
-        $login = security($_POST['login']);
-        $check = $this->model->find($login);
+        $curentLogin = $_SESSION['user'];
+        $curentPassword = $_SESSION['userPassword'];
+        $curentId = $_SESSION['userId'];
 
-        if ($_POST['login'] !== $_SESSION['user']) {
-            $newLogin = $_POST['login'];
-            $updateLogin = $this->model->updateLogin($newLogin);
-            $_SESSION['user'] = $newLogin;
-            header("Refresh:0");
-            return $updateLogin;
-        } else {
-            echo "ne pas update login";
+        $login = $_POST['login'];
+        $newlogin = $login;
+        $password = $_POST['password'];
+        $hashPassword = password_hash($password, PASSWORD_DEFAULT);
+        $newPassword = $hashPassword;
+
+        if (!empty($_POST['login'])) {
+            if ($curentLogin === $login) {
+                echo "Même login";
+            }
         }
     }
 }

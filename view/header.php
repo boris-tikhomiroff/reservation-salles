@@ -13,8 +13,8 @@ if (isset($_POST['logout'])) {
             <li class="nav__item"><a href="../view/inscription.php">Inscription</a></li>
             <li class="nav__item"><a href="../view/connexion.php">Connexion</a></li>
             <li class="nav__item"><a href="../view/profil.php">Profil</a></li>
+            <li class="nav__item"><a href="../view/reservation-form.php">Rerservation-form</a></li>
             <li class="nav__item"><a href="#">Planning</a></li>
-            <li class="nav__item"><a href="#">Rerservation-form</a></li>
             <li class="nav__item">
                 <form action="" method="post">
                     <button type="submit" name="logout">Log Out</button>
