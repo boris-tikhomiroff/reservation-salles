@@ -30,4 +30,20 @@ class User extends Model
             ":password" => "$password"
         ));
     }
+
+    public function updateLogin($login)
+    {
+        $queryUpdateLogin = $this->pdo->prepare("UPDATE `utilisateurs` SET `login` = :login");
+        $queryUpdateLogin->execute(array(
+            ":login" => "$login"
+        ));
+    }
+
+    public function updatePassword($password)
+    {
+        $queryUpdateLogin = $this->pdo->prepare("UPDATE `utilisateurs` SET `password` = :password");
+        $queryUpdateLogin->execute(array(
+            ":password" => "$password"
+        ));
+    }
 }

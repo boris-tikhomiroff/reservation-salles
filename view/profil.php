@@ -1,5 +1,12 @@
 <?php
 session_start();
+require('../libraries/controllers/User.php');
+require('../libraries/models/User.php');
+
+if (isset($_POST['submit'])) {
+    $user = new \Controllers\User();
+    $user->update();
+}
 
 ?>
 <!DOCTYPE html>
@@ -33,10 +40,10 @@ session_start();
             <input type="text" id="login" name="login" value="<?= $_SESSION['user'] ?>" class="form__text"><br>
 
             <label for="password" class="form__label"></label>
-            <input type="password" id="password" name="password" placeholder="Your password" class="form__text"><br>
+            <input type="password" id="password" name="password" placeholder="Your actual password" class="form__text"><br>
 
             <label for="passwordConfirm" class="form__label"></label>
-            <input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="Confirm your password" class="form__text"><br>
+            <input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="Your new password" class="form__text"><br>
 
             <button type="submit " name="submit" class="form__submit">Submit</button>
         </form>

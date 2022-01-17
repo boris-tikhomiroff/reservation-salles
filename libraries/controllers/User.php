@@ -78,5 +78,17 @@ class User
 
     public function update()
     {
+        $login = security($_POST['login']);
+        $check = $this->model->find($login);
+
+        if ($_POST['login'] !== $_SESSION['user']) {
+            $newLogin = $_POST['login'];
+            $updateLogin = $this->model->updateLogin($newLogin);
+            $_SESSION['user'] = $newLogin;
+            header("Refresh:0");
+            return $updateLogin;
+        } else {
+            echo "ne pas update login";
+        }
     }
 }
