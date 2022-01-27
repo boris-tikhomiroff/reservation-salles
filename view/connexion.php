@@ -2,6 +2,12 @@
 require('../libraries/controllers/User.php');
 require('../libraries/models/User.php');
 
+session_start();
+
+// if (isset($_SESSION["user"])) {
+//     header('location:../index.php');
+// }
+
 if (isset($_POST['submit'])) {
     $user = new \Controllers\User();
     $user->connect();

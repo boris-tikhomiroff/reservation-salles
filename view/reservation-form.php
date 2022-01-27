@@ -1,13 +1,18 @@
 <?php
 session_start();
-require('../libraries/controllers/Reservation.php');
-require('../libraries/models/Reservation.php');
+require('../libraries/controllers/Planning.php');
+require('../libraries/models/Planning.php');
+
+if (!isset($_SESSION["user"])) {
+    header('location:../index.php');
+}
 
 if (isset($_POST['submit'])) {
-    // $resa = new \Controllers\Reservation();
-    // var_dump($resa->select());
-    var_dump($_POST);
+    $newEvent = new \Controllers\Planning();
+    $newEvent->insert();
 }
+
+var_dump($_SESSION);
 
 ?>
 <!DOCTYPE html>
@@ -25,6 +30,16 @@ if (isset($_POST['submit'])) {
     <?php require_once 'header.php' ?>
     <main>
         <h1>Reservation</h1>
+        <?php if (isset($newEvent)) : ?>
+            <div class="errors">
+                </ul>
+                <?php foreach ($newEvent->errors as $error) : ?>
+                    <li><?= $error; ?></li>
+
+                <?php endforeach; ?>
+                </ul>
+            </div>
+        <?php endif; ?>
         <form method="post" class="form">
             <label for="titre" class="form__label"></label>
             <input type="text" id="titre" name="titre" placeholder="Your activity" class="form__text"><br>
@@ -34,9 +49,6 @@ if (isset($_POST['submit'])) {
 
             <label for="dateStart" class="form__label"></label>
             <input type="datetime-local" id="dateStart" name="dateStart" class="form__text" step="3600"><br>
-
-            <label for="dateEnd" class="form__label"></label>
-            <input type="datetime-local" id="dateEnd" name="dateEnd" class="form__text" step="3600"><br>
 
             <button type="submit " name="submit" class="form__submit">Submit</button>
         </form>

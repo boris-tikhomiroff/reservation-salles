@@ -3,10 +3,16 @@ session_start();
 require('../libraries/controllers/User.php');
 require('../libraries/models/User.php');
 
+if (!isset($_SESSION["user"])) {
+    header('location:../index.php');
+}
+
 if (isset($_POST['submit'])) {
     $user = new \Controllers\User();
     $user->update();
 }
+
+var_dump($_SESSION);
 
 ?>
 <!DOCTYPE html>
@@ -34,16 +40,18 @@ if (isset($_POST['submit'])) {
                 </ul>
             </div>
         <?php endif; ?>
-        <h1>Profil</h1>
+        <?= @$_SESSION['message']; ?>
+        <!-- <?php unset($_SESSION['message']); ?> -->
+        <h1>Profil <?= $_SESSION['user']; ?></h1>
         <form method="post" class="form">
             <label for="login" class="form__label"></label>
-            <input type="text" id="login" name="login" value="<?= $_SESSION['user'] ?>" class="form__text"><br>
+            <input type="text" id="login" name="login" placeholder="Change your login" class="form__text"><br>
 
             <label for="password" class="form__label"></label>
-            <input type="password" id="password" name="password" placeholder="Your actual password" class="form__text"><br>
+            <input type="password" id="password" name="password" placeholder="Change your password" class="form__text"><br>
 
             <label for="passwordConfirm" class="form__label"></label>
-            <input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="Your new password" class="form__text"><br>
+            <input type="password" id="passwordConfirm" name="passwordConfirm" placeholder="Confirm your password" class="form__text"><br>
 
             <button type="submit " name="submit" class="form__submit">Submit</button>
         </form>

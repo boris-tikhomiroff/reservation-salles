@@ -1,9 +1,13 @@
 <?php
 
-function security($input){
-    $v1  = strip_tags($input);
-    $v1 = htmlentities($input);
-    $v1 = htmlspecialchars($input);
-    $resultat = $v1;
-    return $resultat;
+/**
+ * Fonction qui sécurise les données fournies par un utilisateur
+ *
+ */
+function validData($data)
+{
+    $data = trim($data);
+    $data = stripslashes($data);
+    $data = htmlspecialchars($data);
+    return $data;
 }

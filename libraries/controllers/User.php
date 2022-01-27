@@ -16,9 +16,9 @@ class User
 
     public function register()
     {
-        $login = $_POST['login'];
-        $password = $_POST['password'];
-        $passwordConfirm = $_POST['passwordConfirm'];
+        $login = validData($_POST['login']);
+        $password = validData($_POST['password']);
+        $passwordConfirm = validData($_POST['passwordConfirm']);
 
         if (empty($_POST['login'])) {
             $this->errors['login'] = "Your login is not valid";
@@ -40,15 +40,16 @@ class User
         if (empty($this->errors)) {
             $passwordhash = password_hash($password, PASSWORD_BCRYPT);
             $add = $this->model->insert($_POST['login'], $passwordhash);
-            header('location:index_view.php');
+            header('location:../view/connexion.php');
         }
     }
 
     public function connect()
     {
+
         if (!empty($_POST['login']) && !empty($_POST['password'])) {
-            $login = htmlspecialchars($_POST['login']);
-            $password = htmlspecialchars($_POST['password']);
+            $login = validData($_POST['login']);
+            $password = validData($_POST['password']);
         } else {
             $this->errors['connect'] = "Please fill in all fields";
         }
@@ -76,19 +77,36 @@ class User
 
     public function update()
     {
-        $curentLogin = $_SESSION['user'];
-        $curentPassword = $_SESSION['userPassword'];
-        $curentId = $_SESSION['userId'];
+        $userId = $_SESSION['userId'];
+        $newLogin = validData($_POST['login']);
 
-        $login = $_POST['login'];
-        $newlogin = $login;
-        $password = $_POST['password'];
+        $password = validData($_POST['password']);
         $hashPassword = password_hash($password, PASSWORD_DEFAULT);
         $newPassword = $hashPassword;
 
-        if (!empty($_POST['login'])) {
-            if ($curentLogin === $login) {
-                echo "Même login";
+        $passwordConfirm = validData($_POST['passwordConfirm']);
+
+
+        if (!empty($newLogin)) {
+            $checkLogin = $this->model->getUserInfo($newLogin);
+
+            if (count($checkLogin) == 0) {
+                $this->model->updateLogin($newLogin, $userId);
+                $_SESSION['user'] = $newLogin;
+                $this->errors['login'] = "Votre login à bien été changé";
+            } else {
+                $this->errors['login'] = "Login not available";
+            }
+        }
+
+        if (!empty($_POST['password'])) {
+            if ($password != $passwordConfirm) {
+                $this->errors['password'] = "Your password doesn't match, password has not been changed";
+            } else {
+                $this->model->updatePassword($newPassword, $userId);
+                $_SESSION['userPassword'] = $newPassword;
+                // $_SESSION['message'] = "votre mdp à bien été changé";
+                $this->errors['password'] = "Password has been changed";
             }
         }
     }
