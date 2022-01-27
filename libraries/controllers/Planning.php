@@ -65,7 +65,6 @@ class Planning
         }
     }
 
-
     /**
      * Methode qui récuppère l'event selon son heure de début
      *
@@ -99,5 +98,85 @@ class Planning
         $startWeek = (clone $start)->modify('last monday');
 
         return $startWeek;
+    }
+
+    public function headPlanning()
+    {
+        $start = new DateTime('now');
+        $start_m = (clone $start)->modify('last monday');
+        $horaire = "Horaire";
+
+
+        for ($j = -1; $j < 7; $j++) {
+            $day = (clone $start_m)->modify('+' . $j . 'day');
+            // echo "<th>" . $day->format('m-d') . "</th>";
+            if ($j == -1) {
+                echo "<th>" . $horaire . "</th>";
+            } else {
+                echo "<th>" . $day->format('m-d') . "</th>";
+            }
+        }
+    }
+
+    // public function bodyTable()
+    // {
+    //     $start = new DateTime('now');
+    //     $start_m = (clone $start)->modify('last monday');
+
+    //     // a changer pour commencer à 8h
+    //     for ($i = 7; $i < 20; $i++) {
+    //         echo "<tr>";
+    //         for ($j = -1; $j < 7; $j++) {
+
+    //             $test = "hello";
+    //             $heure = (clone $start_m)->modify('+' . $i . 'hour');
+    //             $day = (clone $start_m)->modify('+' . $j . 'day');
+
+    //             $resa = $this->startEvent($heure->format('Y-m-d H:s'));
+    //             // echo "<td>" . $heure->format('H:s') . "</td>";
+    //             // echo "<td>" . $test . "</td>";
+
+    //             if ($j == -1 && $i != 7) {
+    //                 echo "<td>" . $heure->format('H:s') . "</td>";
+    //             } else {
+    //             }
+    //             if (!empty($resa)) {
+    //                 echo "<td>" . $resa[0]['titre'] . "</td>";
+    //             }
+    //             // echo "<td>" . $day->format('m-d') . "</td>"; 
+    //         }
+    //         echo "</tr>";
+    //     }
+    // }
+
+    public function bodyTable()
+    {
+        for ($i = 7; $i < 20; $i++) {
+            echo "<tr>";
+            for ($j = -1; $j < 7; $j++) {
+                $start = new DateTime('now');
+
+                $start_m = (clone $start)->modify('last monday');
+
+                $day = (clone $start_m)->modify('+' . $j . 'day');
+                $heure = (clone $day)->modify('+' . $i . 'hour');
+                $resa = $this->startEvent($heure->format('Y-m-d H:s'));
+
+
+                echo "<td>";
+                if ($j == -1 && $i != 7) {
+                    echo "<div>" . $heure->format('H:s') . "</div>";
+                } else {
+                    if (!empty($resa)) {
+                        echo "<a href=\"./reservation.php?reservation=" . $resa[0]['id'] . "\">";
+                        echo "<div>" . $resa[0]['titre'] . "<div>";
+                        echo "</a>";
+                    }
+                }
+
+                echo "</td>";
+            }
+        }
+        echo "</tr>";
     }
 }

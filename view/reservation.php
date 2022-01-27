@@ -11,6 +11,7 @@ require_once('../libraries/models/Planning.php');
 if (!isset($_GET['reservation'])) {
     header('location:../view/index_view.php');
 }
+setlocale(LC_TIME, "fr_FR");
 
 ?>
 <!DOCTYPE html>

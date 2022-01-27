@@ -27,7 +27,8 @@ $start_m = (clone $start)->modify('last monday');
     <?php require_once 'header.php' ?>
     <main>
         <h1>Semaine du <?= $planning->toString()->format('d-m'); ?> au <?= $planning->toString()->modify('6 day')->format('d-m-Y'); ?></h1>
-        <table>
+
+        <!-- <table>
             <?php for ($i = 7; $i < 20; $i++) : ?>
                 <tr>
                     <?php for ($j = -1; $j < 7; $j++) : ?>
@@ -63,6 +64,15 @@ $start_m = (clone $start)->modify('last monday');
                     <?php endfor; ?>
                 </tr>
             <?php endfor; ?>
+        </table> -->
+
+        <table>
+            <thead>
+                <?= $planning->headPlanning(); ?>
+            </thead>
+            <tbody>
+                <?= $planning->bodyTable(); ?>
+            </tbody>
         </table>
 
     </main>
