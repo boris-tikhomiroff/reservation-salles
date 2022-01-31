@@ -71,7 +71,7 @@ class User
     public static function disconnect()
     {
         $disconnect = session_destroy();
-        header("Refresh:0");
+        header("location: ../index.php");
         return $disconnect;
     }
 

@@ -21,11 +21,12 @@ if (isset($_POST['submit'])) {
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Connexion</title>
+    <link rel="stylesheet" href="../public/css/styles.css">
 </head>
 
 <body>
     <?php require_once 'header.php' ?>
-    <main>
+    <main class="main_form">
         <?php if (isset($user)) : ?>
             <div class="errors">
                 <!-- <p>You have not completed the form correctly.</p> -->
@@ -37,16 +38,22 @@ if (isset($_POST['submit'])) {
                 </ul>
             </div>
         <?php endif; ?>
-        <h1>Connexion</h1>
 
         <form method="post" class="form">
-            <label for="login" class="form__label"></label>
-            <input type="text" id="login" name="login" placeholder="Your login" class="form__text"><br>
+            <h1 class="formTittle">Connexion</h1>
+            <div class="formSection formSection1">
+                <label for="login"></label>
+                <input type="text" id="login" name="login" placeholder="Your login" class="formText"><br>
+            </div>
 
-            <label for="password" class="form__label"></label>
-            <input type="password" id="password" name="password" placeholder="Your password" class="form__text"><br>
+            <div class="formSection formSection2">
+                <label for="password" class="form__label"></label>
+                <input type="password" id="password" name="password" placeholder="Your password" class="formText"><br>
+            </div>
 
-            <button type="submit " name="submit" class="form__submit">Submit</button>
+            <div class="formSection  formSection3">
+                <button type="submit " name="submit" class="formButton">Submit</button>
+            </div>
         </form>
 
     </main>

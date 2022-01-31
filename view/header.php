@@ -1,30 +1,37 @@
 <?php
 if (isset($_POST['logout'])) {
-    require("../libraries/controllers/User.php");
-    $user = \Controllers\User::disconnect();
+    // require("../libraries/controllers/User.php");
+    // $deco = \Controllers\User::disconnect();
+    session_destroy();
+    header("location: ../index.php");
 }
 ?>
 <header class="header">
-    <nav class="header__nav">
-        <ul>
-            <li class="header__logoContainer">
-                <a href="../index.php"><img src="../public/images/temporary_logo.png" alt="" class="logocontainer__logo"></a>
-            </li>
-            <li class="nav__item"><a href="../view/planning.php">Planning</a></li>
+    <input id="toggle" type="checkbox"></input>
+
+    <label for="toggle" class="hamburger">
+        <div class="hamburger__line--top"></div>
+        <div class="hamburger__line--bottom"></div>
+    </label>
+
+    <div class="container">
+        <nav class="nav">
+            <a href="../index.php" class="nav__link">Home</a>
+            <a href="../view/planning.php" class="nav__link">Planning</a>
+
             <?php if (!isset($_SESSION['user'])) : ?>
-                <li class="nav__item"><a href="../view/inscription.php">Inscription</a></li>
-                <li class="nav__item"><a href="../view/connexion.php">Connexion</a></li>
+                <a href="../view/inscription.php" class="nav__link">Inscription</a>
+                <a href="../view/connexion.php" class="nav__link">Connexion</a>
             <?php endif; ?>
 
             <?php if (isset($_SESSION['user'])) : ?>
-                <li class="nav__item"><a href="../view/reservation-form.php">Rerservation-form</a></li>
-                <li class="nav__item"><a href="../view/profil.php">Profil</a></li>
-                <li class="nav__item">
-                    <form action="" method="post">
-                        <button type="submit" name="logout">Log Out</button>
-                    </form>
-                </li>
+                <a href="../view/reservation-form.php" class="nav__link">Rerservation-form</a>
+                <a href="../view/profil.php" class="nav__link">Profil</a>
+                <form action="" method="post" class="nav__link">
+                    <button type="submit" name="logout" class="nav__link--btn">Log Out</button>
+                </form>
             <?php endif; ?>
-        </ul>
-    </nav>
+        </nav>
+    </div>
+
 </header>
