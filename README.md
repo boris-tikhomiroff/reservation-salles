@@ -6,6 +6,5 @@ Stack utilisées :
  - Sass (BEM)
  - SQL (MySQL)
 
-test : 
-&#128218
-&#x1F4DA
+
+:books:
