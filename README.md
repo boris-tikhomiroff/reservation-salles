@@ -8,3 +8,4 @@ Stack utilisées :
 
 test : 
 &#128218
+&#x1F4DA
