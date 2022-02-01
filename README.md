@@ -1,9 +1,11 @@
-:books: # Réservation Salle H1 :books:
-
+📚 Réservation Salles 📚
 ---
+// Quatrième projet php, création d'un système de réservation salles. //
 
-Stack utilisées : 
+
+📚 Stack utilisées :
+---
  
- - PHP (POO, PDO, MVC) -> Première fois que j'utilise dans un projet ces trois concepts.
- - Sass (BEM)
- - SQL (MySQL)
+ - **PHP (POO, PDO, MVC)** :arrow_right: Premier projet où j'haborde ces trois concepts.
+ - **Sass (BEM)**
+ - **SQL (MySQL)**
