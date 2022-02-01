@@ -6,5 +6,5 @@ Stack utilisées :
  - Sass (BEM)
  - SQL (MySQL)
 
-test
-![alt text](https://sass-lang.com/assets/img/styleguide/color-1c4aab2b.png)
+test : 
+U+1F4DA
