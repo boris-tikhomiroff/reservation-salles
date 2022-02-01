@@ -3,7 +3,7 @@
 // Quatrième projet php, création d'un système de réservation salles. //
 
 
-📚 Stack utilisées :
+:clipboard: Stack utilisées :
 ---
  
  - **PHP (POO, PDO, MVC)**
