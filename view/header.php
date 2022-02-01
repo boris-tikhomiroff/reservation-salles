@@ -30,7 +30,7 @@ if (isset($_POST['logout'])) {
                 <form action="" method="post" class="nav__link">
                     <button type="submit" name="logout" class="nav__link--btn">Log Out</button>
                 </form>
-                <a href="#"><img src="../public/images/GitHub-Mark-Light-64px.png" alt="Github logo" class="nav__link--logo"></a>
+                <a href="https://github.com/boris-tikhomiroff/reservation-salles"><img src="../public/images/GitHub-Mark-Light-64px.png" alt="Github logo" class="nav__link--logo"></a>
             <?php endif; ?>
         </nav>
     </div>
