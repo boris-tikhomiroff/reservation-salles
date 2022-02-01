@@ -6,6 +6,6 @@
 📚 Stack utilisées :
 ---
  
- - **PHP (POO, PDO, MVC)** :arrow_right: Premier projet où j'haborde ces trois concepts.
+ - **PHP (POO, PDO, MVC)**
  - **Sass (BEM)**
  - **SQL (MySQL)**
