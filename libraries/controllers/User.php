@@ -93,7 +93,7 @@ class User
             if (count($checkLogin) == 0) {
                 $this->model->updateLogin($newLogin, $userId);
                 $_SESSION['user'] = $newLogin;
-                $this->errors['login'] = "Votre login à bien été changé";
+                $this->errors['login'] = "Your login has been changed.";
             } else {
                 $this->errors['login'] = "Login not available";
             }

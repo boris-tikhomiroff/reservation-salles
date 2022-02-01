@@ -27,6 +27,7 @@ class Planning
         date_default_timezone_set('Europe/Paris');
         $userDate = $_POST['dateStart'];
 
+
         // Recupération du début de la date
         $timestampStart = strtotime($userDate);
         $startDate = date('Y-m-d H:i:s', $timestampStart);
@@ -39,20 +40,20 @@ class Planning
         $authorizedHours = getdate($timestampStart);
 
         if (empty($titre) || empty($description) || empty($userDate)) {
-            $this->errors['hour'] = "Veuillez renseigner un titre, une description et un horaire";
+            $this->errors['hour'] = "Please fill in a title, a description and a schedule.";
         } else {
 
             if ($authorizedHours['hours'] < 8 || $authorizedHours['hours'] > 19) {
-                $this->errors['hour'] = "Vous ne pouvez reserver que entre 08h et 19h";
+                $this->errors['hour'] = "You can only book between 08h and 19h.";
             }
             if ($authorizedHours['wday'] >= 6) {
-                $this->errors['hour'] = "Vous ne pouvez reserver uniquement du lundi au vendredi et non pas le weekend";
+                $this->errors['hour'] = "You can only book from Monday to Friday, not on weekends.";
             }
 
             if (!empty($userDate)) {
                 $verif = $this->model->verifResa($startDate);
                 if ($verif == true) {
-                    $this->errors['hour'] = "Crénaux non dispo";
+                    $this->errors['hour'] = "Schedule not available.";
                 }
             }
             if (empty($this->errors)) {
@@ -116,36 +117,6 @@ class Planning
         }
     }
 
-    // public function bodyTable()
-    // {
-    //     $start = new DateTime('now');
-    //     $start_m = (clone $start)->modify('last monday');
-
-    //     // a changer pour commencer à 8h
-    //     for ($i = 7; $i < 20; $i++) {
-    //         echo "<tr>";
-    //         for ($j = -1; $j < 7; $j++) {
-
-    //             $test = "hello";
-    //             $heure = (clone $start_m)->modify('+' . $i . 'hour');
-    //             $day = (clone $start_m)->modify('+' . $j . 'day');
-
-    //             $resa = $this->startEvent($heure->format('Y-m-d H:s'));
-    //             // echo "<td>" . $heure->format('H:s') . "</td>";
-    //             // echo "<td>" . $test . "</td>";
-
-    //             if ($j == -1 && $i != 7) {
-    //                 echo "<td>" . $heure->format('H:s') . "</td>";
-    //             } else {
-    //             }
-    //             if (!empty($resa)) {
-    //                 echo "<td>" . $resa[0]['titre'] . "</td>";
-    //             }
-    //             // echo "<td>" . $day->format('m-d') . "</td>"; 
-    //         }
-    //         echo "</tr>";
-    //     }
-    // }
 
     public function bodyTable()
     {
@@ -167,7 +138,7 @@ class Planning
                 } else {
                     if (!empty($resa)) {
                         echo "<a href=\"./reservation.php?reservation=" . $resa[0]['id'] . "\">";
-                        echo "<div>" . $resa[0]['titre'] . "<div>";
+                        echo "<div>" . $resa[0]['titre'] . "</div>";
                         echo "</a>";
                     }
                 }

@@ -21,12 +21,14 @@ $start_m = (clone $start)->modify('last monday');
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Planning</title>
     <link rel="stylesheet" href="../public/css/styles.css">
+    <link rel="icon" type="image/x-icon" href="../public/images/favicon.ico">
+
 </head>
 
 <body>
     <?php require_once 'header.php' ?>
-    <main>
-        <h1>Semaine du <?= $planning->toString()->format('d-m'); ?> au <?= $planning->toString()->modify('6 day')->format('d-m-Y'); ?></h1>
+    <main class="main__planning">
+        <h1 class="heading__planning">Week of <?= $planning->toString()->format('d-m'); ?> au <?= $planning->toString()->modify('6 day')->format('d-m-Y'); ?></h1>
 
         <table>
             <thead>
@@ -37,7 +39,7 @@ $start_m = (clone $start)->modify('last monday');
             </tbody>
         </table>
 
-        <a href="../view/reservation-form.php">Book an event</a>
+        <a href="../view/reservation-form.php" class="link__planning">Book an event</a>
 
     </main>
 </body>
